@@ -1,2 +1,0 @@
-quand je démarre le conteneur avec docker compose up -d et que je me connecte à http://localhost:8080/ je vois l'interface de TaskFlow. quand j'essaye d'ajouter : Persistance test 1, je vois erreur http 404.
-j'aimerai que tu corrige le problème, que tu me dise qu'est ce qui ne marchait pas et qu'est ce que t'as fais
