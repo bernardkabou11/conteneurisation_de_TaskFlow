@@ -1,0 +1,61 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: taskflow-db
+    environment:
+      POSTGRES_DB: taskflow
+      POSTGRES_USER: taskflow
+      POSTGRES_PASSWORD: taskflow 
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U taskflow"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - taskflow-net
+
+  api:
+    build:
+      context: ./api
+    container_name: taskflow-api
+    environment:
+      APP_ENV: production
+      HOST: 0.0.0.0
+      PORT: 3000
+
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: taskflow
+      DB_USER: taskflow
+      DB_PASSWORD: taskflow
+
+      DB_CONNECT_RETRIES: 5
+      DB_CONNECT_INTERVAL_MS: 2000
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    networks:
+      - taskflow-net
+
+  front:
+    build:
+      context: ./front
+    container_name: taskflow-front
+    ports:
+      - "8080:80"
+    networks:
+      - taskflow-net
+    depends_on:
+      - api
+
+volumes:
+  db_data:
+
+networks:
+  taskflow-net:
