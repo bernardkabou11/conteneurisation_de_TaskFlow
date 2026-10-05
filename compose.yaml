@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_DB: taskflow
       POSTGRES_USER: taskflow
-      POSTGRES_PASSWORD: taskflow 
+      POSTGRES_PASSWORD: taskflow
     volumes:
       - db_data:/var/lib/postgresql/data
     healthcheck:
@@ -19,8 +19,7 @@ services:
       - taskflow-net
 
   api:
-    build:
-      context: ./api
+    image: bernardkabou11/taskflow-api:1.0.0
     container_name: taskflow-api
     environment:
       APP_ENV: production
@@ -44,8 +43,7 @@ services:
       - taskflow-net
 
   front:
-    build:
-      context: ./front
+    image: bernardkabou11/taskflow-front:1.0.0
     container_name: taskflow-front
     ports:
       - "8080:80"
