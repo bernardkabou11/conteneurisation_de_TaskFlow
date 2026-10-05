@@ -21,6 +21,9 @@ FROM nginx:alpine
 # Copier le build dans nginx
 COPY --from=build /app/dist /usr/share/nginx/html
 
+# Remplacer la configuration par défaut pour proxy /api vers le backend
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Exposer le port
 EXPOSE 80
 
