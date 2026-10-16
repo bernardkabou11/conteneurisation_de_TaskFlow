@@ -411,4 +411,4 @@ Ces pistes sont des évolutions possibles et ne sont pas déployées dans les ma
 
 ## Auteur
 
-À compléter.
+Bernard Daconceicao Daniel KABOU
