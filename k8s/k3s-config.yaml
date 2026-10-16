@@ -1,0 +1,3 @@
+# Reference note for the already-installed K3s cluster; not a Kubernetes manifest.
+# No K3s server settings need to change for this session.
+# Keep Traefik on ports 80 and 443; the TaskFlow front Service uses port 8080.
